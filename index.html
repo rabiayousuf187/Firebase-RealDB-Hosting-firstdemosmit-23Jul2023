@@ -34,6 +34,7 @@
             </label>
         </div>
 
+        <button type="submit" id="getUsers" name="getUsers" value="getUsers">Get Users</button>
         <button type="login" id="logIn" name="login_submit" value="Login">Login</button>
         <button type="submit" id="signUp" name="signup_submit" value="Signup">sign Up</button>
         <div class="container" style="background-color:#f1f1f1">
@@ -63,6 +64,7 @@
             userId: userId,
         });
     }
+
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     // Your web app's Firebase configuration
@@ -149,6 +151,20 @@
                 // ..
             });
     });
+    getUsers.addEventListener('click', (e) => {
+        const dbRef = firebase.database().ref();
+        dbRef.child("users").get().then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    });
+
+
 </script>
 
 </html>
